@@ -13,8 +13,10 @@ import {
   Td,
   Th,
   Tr,
-  Text
+  Text,
+  Tag,
 } from "@chakra-ui/react";
+import CodeBlock from "./CodeBlock";
 
 type Prop = {
   code: string,
@@ -40,6 +42,14 @@ const components: any = {
   tr: (props: any) => <Tr {...props} />,
   input: (props: any) => <Checkbox isDisabled defaultIsChecked={props.checked} {...props} />,
   p: (props: any) => <Text {...props} />,
+  code: (props: any) => {
+    console.log(props);
+
+    const language = (props?.className ?? "").replace("language-", "")
+    const code = props?.children ?? "";
+
+    return language != "" ? <CodeBlock language={language} code={code}/> : <Tag {...props}/>
+  }
 }
 
 export default function BlogPost({code, frontMatter}: Prop) {
