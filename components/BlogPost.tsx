@@ -17,7 +17,6 @@ import {
   Tag,
 } from "@chakra-ui/react";
 import CodeBlock from "./CodeBlock";
-import type { MetaFunction } from "remix";
 
 type Prop = {
   code: string,

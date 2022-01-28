@@ -1,6 +1,7 @@
 import { Prism as ReactSyntaxHighlighter } from "react-syntax-highlighter";
-import { Box, Text } from "@chakra-ui/react";
-import { duotoneDark as theme } from "react-syntax-highlighter/dist/cjs/styles/prism"
+import { Box, Text, Button, useColorModeValue, useClipboard } from "@chakra-ui/react";
+import { materialOceanic, materialLight } from "react-syntax-highlighter/dist/cjs/styles/prism"
+import { CopyIcon, CheckIcon } from "@radix-ui/react-icons";
 import chroma from "chroma-js";
 
 type Prop = {
@@ -10,7 +11,11 @@ type Prop = {
 }
 
 export default function CodeBlock({code, language, filename}: Prop) {
-  const backgroundColor: string = theme?.['code[class*="language-"]']?.background ?? "#000";
+  const theme = useColorModeValue(materialLight, materialOceanic)
+  const textColor = useColorModeValue("black", "whiteAlpha.900");
+  const themeStyle: any = theme?.['code[class*="language-"]'] ?? theme?.['pre[class*="language-"]'];
+  const backgroundColor = themeStyle?.background ?? themeStyle?.backgroundColor ?? "#000";
+  const { hasCopied, onCopy} = useClipboard(code);
 
   return (
     <Box
@@ -29,12 +34,21 @@ export default function CodeBlock({code, language, filename}: Prop) {
         px="1em"
         display="flex"
         alignItems="center"
+        justifyContent="space-between"
         background={chroma(backgroundColor).darken(.25).hex()}
         borderTopRadius="lg"
-        columnGap="4"
       >
-        <Text color="whiteAlpha.700">{language.toUpperCase()}</Text>
-        {filename && <Text color="whiteAlpha.900" fontSize="xs">{filename}</Text>}
+        <Box
+          display="flex"
+          alignItems="center"
+          columnGap="4"
+        >
+          <Text color={textColor}>{language.toUpperCase()}</Text>
+          {filename && <Text color={textColor} fontSize="xs">{filename}</Text>}
+        </Box>
+        <Button variant="ghost" size="sm" onClick={onCopy}>
+          { hasCopied ? <CheckIcon/> : <CopyIcon />}
+        </Button>
       </Box>
       <ReactSyntaxHighlighter language={language} style={theme} showLineNumbers>
         {code}

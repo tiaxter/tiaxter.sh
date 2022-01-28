@@ -4,15 +4,25 @@ import {
   Meta,
   Outlet,
   Scripts,
-  ScrollRestoration
+  ScrollRestoration,
+  useLoaderData,
 } from "remix";
-import type { MetaFunction } from "remix";
+import type { MetaFunction, LoaderFunction } from "remix";
 
-import { ChakraProvider, Box } from "@chakra-ui/react";
+import { ChakraProvider, Box, ColorModeScript, extendTheme } from "@chakra-ui/react";
+import Navbar from "../components/Navbar";
+
+const theme = extendTheme({
+  config: {
+    initialColorMode: 'light',
+    useSystemColorMode: true,
+  },
+});
 
 export const loader: LoaderFunction = () => {
   return {
-    appName: process.env.APP_NAME
+    appName: process.env.APP_NAME,
+    githubName: process.env.GITHUB_NAME,
   };
 }
 
@@ -21,6 +31,8 @@ export const meta: MetaFunction = () => {
 };
 
 export default function App() {
+  const data = useLoaderData();
+
   return (
     <html lang="en">
       <head>
@@ -31,7 +43,9 @@ export default function App() {
       </head>
       <body>
         <ChakraProvider>
-          <Box w="100%" mx="auto">
+          <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+          <Navbar githubName={data.githubName} />
+          <Box w="100%" mx="auto" py="5">
             <Box maxW={{ xl: "5xl", lg: "4xl", md: "3xl", sm: "md" }} mx="auto">
               <Outlet />
             </Box>
