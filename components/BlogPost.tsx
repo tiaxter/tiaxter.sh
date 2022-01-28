@@ -60,8 +60,6 @@ const components: any = {
 export default function BlogPost({code, frontmatter}: Prop) {
   const Component = useMemo(() => getMDXComponent(code), [code]);
 
-  console.log(frontmatter);
-
   return (
     <div>
       <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
