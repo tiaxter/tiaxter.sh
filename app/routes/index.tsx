@@ -1,6 +1,6 @@
 import { Box, Heading, Image, Text } from "@chakra-ui/react";
 import { useLoaderData } from "remix";
-import type { LoaderFunction } from "remix";
+import type { LoaderFunction, MetaFunction } from "remix";
 import { FiLinkedin, FiMail, FiInstagram, FiSend } from "react-icons/fi";
 import SocialButton from "../../components/SocialButton";
 
@@ -10,6 +10,12 @@ export const loader: LoaderFunction = () => {
     linkedinProfile: process.env.LINKEDIN_PROFILE,
     telegramProfile: process.env.TELEGRAM_PROFILE,
     email: process.env.PERSONAL_EMAIL,
+  };
+};
+
+export const meta: MetaFunction = ({ parentsData }) => {
+  return {
+    title: `Home | ${parentsData.root.appName}`
   };
 };
 
@@ -27,7 +33,12 @@ export default function Index() {
       h="100%"
       minH="100%"
     >
-      <Heading fontSize="5xl">👋Hey, sono Jerry!</Heading>
+      <Heading
+        fontSize={{ xl: "5xl", lg: "4xl", md: "3xl", sm: "2xl" }}
+      >
+        👋Hey, sono Jerry!
+      </Heading>
+
       <Image
         src="./me.jpg"
         borderRadius="full"

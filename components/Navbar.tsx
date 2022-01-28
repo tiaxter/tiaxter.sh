@@ -9,7 +9,7 @@ export default function Navbar({ githubName }: any) {
     <Box
       w="100%"
       h="5em"
-      px="10em"
+      px={{ xl: "10em", lg: "6em", md: "3em", sm: "2em" }}
       display="flex"
       alignItems="center"
       justifyContent="space-between"
