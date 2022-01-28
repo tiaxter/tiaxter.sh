@@ -12,6 +12,7 @@ import type { MetaFunction, LoaderFunction } from "remix";
 import { ChakraProvider, Box, ColorModeScript, extendTheme } from "@chakra-ui/react";
 import Navbar from "../components/Navbar";
 
+// Theme management with Chakra
 const theme = extendTheme({
   config: {
     initialColorMode: 'light',
@@ -19,6 +20,7 @@ const theme = extendTheme({
   },
 });
 
+// Read env variables
 export const loader: LoaderFunction = () => {
   return {
     appName: process.env.APP_NAME,
@@ -27,7 +29,7 @@ export const loader: LoaderFunction = () => {
 }
 
 export const meta: MetaFunction = () => {
-  return { title: "New Remix App" };
+  return { title: "Remix App" };
 };
 
 export default function App() {

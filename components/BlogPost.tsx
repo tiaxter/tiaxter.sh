@@ -23,6 +23,7 @@ type Prop = {
   frontMatter: any,
 }
 
+// Override markdown vanilla components with Chakra components
 const components: any = {
   h1: (props: any) => <Heading fontSize="4xl" {...props} />,
   h2: (props: any) => <Heading fontSize="3xl" {...props} />,

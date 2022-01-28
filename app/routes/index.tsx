@@ -4,6 +4,7 @@ import type { LoaderFunction, MetaFunction } from "remix";
 import { FiLinkedin, FiMail, FiInstagram, FiSend } from "react-icons/fi";
 import SocialButton from "../../components/SocialButton";
 
+// Load env variables
 export const loader: LoaderFunction = () => {
   return {
     instagramProfile: process.env.INSTAGRAM_PROFILE,
