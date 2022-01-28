@@ -45,7 +45,10 @@ const components: any = {
   p: (props: any) => <Text {...props} />,
   code: (props: any) => {
     const language = (props?.className ?? "").replace("language-", "")
-    const code = props?.children ?? "";
+
+    let code = props?.children ?? "";
+    // Remove last endline character
+    code = code.slice(0, code.lastIndexOf("\n"))
 
     return language != "" ? <CodeBlock language={language} code={code} filename={props?.filename}/> : <Tag {...props}/>
   }

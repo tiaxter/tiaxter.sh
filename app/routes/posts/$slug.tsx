@@ -1,10 +1,11 @@
 import BlogPost from "../../../components/BlogPost";
 import { LoaderFunction, useLoaderData } from "remix";
+import type { MetaFunction } from "remix";
 import {getPostData} from "~/posts.server";
 
 export const loader: LoaderFunction = async ({ params }) => {
   try {
-    return await getPostData(params.slug);
+    return await getPostData(params?.slug ?? "");
   } catch (e) {
     // If post not found load 404 page
     throw new Response("Not Found", {
