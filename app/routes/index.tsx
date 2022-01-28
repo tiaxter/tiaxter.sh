@@ -35,7 +35,7 @@ export default function Index() {
       minH="100%"
     >
       <Heading
-        fontSize={{ xl: "5xl", lg: "4xl", md: "3xl", sm: "2xl" }}
+        fontSize="3xl"
       >
         👋Hey, sono Jerry!
       </Heading>

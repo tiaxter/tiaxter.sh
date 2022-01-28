@@ -2,6 +2,10 @@ import { join as pathJoin } from "path";
 import { read as matterRead } from "gray-matter";
 import { readdirSync as readDir, readFileSync as readFile } from "fs";
 import { bundleMDX } from "mdx-bundler";
+import moment from "moment";
+import "moment/locale/it";
+
+moment.locale("it");
 
 const postsPath = pathJoin(__dirname, "..", "posts");
 
@@ -15,7 +19,10 @@ export function getPosts(){
         const { data: frontMatter, excerpt } = matterRead(filepath, {excerpt: true});
 
         return {
-          frontMatter,
+          frontMatter: {
+            ...frontMatter,
+            date: moment(frontMatter.date).format("LLL"),
+          },
           slug: filename.split(".")[0],
           excerpt,
         };

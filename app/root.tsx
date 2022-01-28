@@ -51,11 +51,12 @@ export default function App() {
             flexDirection="column"
             minH="100vh"
             h="100vh"
+            mx="8"
           >
               <ColorModeScript initialColorMode={theme.config.initialColorMode} />
               <Navbar githubName={data.githubName} />
               <Box w="100%" h="100%" py="5" display="flex" justifyContent="center">
-                <Box maxW={{ xl: "5xl", lg: "4xl", md: "3xl", sm: "md" }} w="100%">
+                <Box maxW={{ xl: "5xl", lg: "4xl", md: "3xl", sm: "md", xs: "sm" }} w="100%">
                   <Outlet />
                 </Box>
               </Box>
