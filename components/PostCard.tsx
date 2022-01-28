@@ -1,4 +1,5 @@
 import { Box, Heading, Tag, Text } from "@chakra-ui/react";
+import PostTag from "./PostTag";
 import { Link } from "remix"
 
 type Prop = {
@@ -24,9 +25,7 @@ export default function PostCard({ slug, title, tags, date, excerpt}: Prop) {
       <Link to={`./${slug}`}>
         <Box display="flex" my="1">
           {
-            (tags ?? []).map((tag: string) => (
-              <Tag key={tag} size="sm" mr="2" borderRadius="lg">{tag}</Tag>
-            ))
+            (tags ?? []).map((tag: string) => <PostTag key={tag} tag={tag} />)
           }
         </Box>
         <Heading size="xl">{title}</Heading>

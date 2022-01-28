@@ -22,11 +22,11 @@ export const meta: MetaFunction = ({ data, parentsData }) => {
 };
 
 export default function PostSlug() {
-  const { code, frontMatter }: any = useLoaderData();
+  const { code, frontmatter }: any = useLoaderData();
 
   return (
     <Box pb="5">
-      <BlogPost code={code} frontMatter={frontMatter} />
+      <BlogPost code={code} frontmatter={frontmatter} />
     </Box>
   )
 }

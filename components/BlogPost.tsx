@@ -15,12 +15,15 @@ import {
   Tr,
   Text,
   Tag,
+  Box,
+  Divider,
 } from "@chakra-ui/react";
 import CodeBlock from "./CodeBlock";
+import PostTag from "./PostTag";
 
 type Prop = {
   code: string,
-  frontMatter: any,
+  frontmatter: any,
 }
 
 // Override markdown vanilla components with Chakra components
@@ -54,10 +57,25 @@ const components: any = {
   }
 }
 
-export default function BlogPost({code, frontMatter}: Prop) {
+export default function BlogPost({code, frontmatter}: Prop) {
   const Component = useMemo(() => getMDXComponent(code), [code]);
 
+  console.log(frontmatter);
+
   return (
-    <Component components={components} />
+    <div>
+      <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
+        <Box w="auto">
+          <Box display="flex" w="100%">
+            {
+              frontmatter?.tags.map( (tag: string) => <PostTag key={tag} tag={tag} />)
+            }
+          </Box>
+          <Heading fontSize="5xl">{frontmatter?.meta?.title ?? ""}</Heading>
+        </Box>
+      </Box>
+      <Divider my="10" />
+      <Component components={components} />
+    </div>
   )
 }
