@@ -3,7 +3,13 @@ import { Box, Text } from "@chakra-ui/react";
 import { duotoneDark as theme } from "react-syntax-highlighter/dist/cjs/styles/prism"
 import chroma from "chroma-js";
 
-export default function CodeBlock(props: any) {
+type Prop = {
+  code: string,
+  language: string,
+  filename?: string
+}
+
+export default function CodeBlock({code, language, filename}: Prop) {
   const backgroundColor: string = theme?.['code[class*="language-"]']?.background ?? "#000";
 
   return (
@@ -25,11 +31,13 @@ export default function CodeBlock(props: any) {
         alignItems="center"
         background={chroma(backgroundColor).darken(.25).hex()}
         borderTopRadius="lg"
+        columnGap="4"
       >
-        <Text color="whiteAlpha.700">{props.language.toUpperCase()}</Text>
+        <Text color="whiteAlpha.700">{language.toUpperCase()}</Text>
+        {filename && <Text color="whiteAlpha.900" fontSize="xs">{filename}</Text>}
       </Box>
-      <ReactSyntaxHighlighter language={props.language} style={theme} showLineNumbers>
-        {props.code}
+      <ReactSyntaxHighlighter language={language} style={theme} showLineNumbers>
+        {code}
       </ReactSyntaxHighlighter>
     </Box>
   )

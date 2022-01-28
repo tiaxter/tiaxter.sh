@@ -43,12 +43,10 @@ const components: any = {
   input: (props: any) => <Checkbox isDisabled defaultIsChecked={props.checked} {...props} />,
   p: (props: any) => <Text {...props} />,
   code: (props: any) => {
-    console.log(props);
-
     const language = (props?.className ?? "").replace("language-", "")
     const code = props?.children ?? "";
 
-    return language != "" ? <CodeBlock language={language} code={code}/> : <Tag {...props}/>
+    return language != "" ? <CodeBlock language={language} code={code} filename={props?.filename}/> : <Tag {...props}/>
   }
 }
 

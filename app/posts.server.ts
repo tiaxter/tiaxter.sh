@@ -9,7 +9,6 @@ export function getPosts(){
   const postsFiles = readDir(postsPath);
 
   return postsFiles
-    .filter(filename => filename.includes(".mdx"))
     .map(filename => {
         const filepath = pathJoin(postsPath, filename);
 
@@ -46,7 +45,7 @@ const getRehypeMdxCodeMeta = async () => {
             return props
           }
 
-          props[prop] = value
+          props[prop] = value.replaceAll('"', "")
 
           return props
         }, node.properties)
