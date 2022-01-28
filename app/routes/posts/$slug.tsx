@@ -13,6 +13,12 @@ export const loader: LoaderFunction = async ({ params }) => {
   }
 }
 
+export const meta: MetaFunction = ({ data, parentsData }) => {
+  return { 
+    title: `${data.frontmatter.meta.title} | ${parentsData.root.appName}` 
+  };
+};
+
 export default function PostSlug() {
   const { code, frontMatter }: any = useLoaderData();
 

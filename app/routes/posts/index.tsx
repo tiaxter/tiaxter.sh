@@ -1,10 +1,15 @@
 import { useLoaderData, Link } from "remix";
 import { getPosts } from "../../posts.server";
 import type { Post } from "../../posts.server";
-// import ReactMarkdown from "react-markdown";
 import { Box, Heading, Text, Tag } from "@chakra-ui/react";
 
 export const loader = getPosts;
+
+export const meta: MetaFunction = ({ parentsData }) => {
+  return {
+    title: `Posts | ${parentsData.root.appName}`
+  };
+};
 
 export default function Posts() {
   const posts: Post[] = useLoaderData();
@@ -15,6 +20,7 @@ export default function Posts() {
       {
         posts.map((post: Post) => (
             <Box
+              key={post.slug}
               w="100%"
               display="flex"
               flexDirection="column"
@@ -24,7 +30,7 @@ export default function Posts() {
               style={{ transition: ".5s ease all"}}
               _hover={{ boxShadow: "xl", transition: "1s ease all" }}
             >
-              <Link key={post.slug} to={`./${post.slug}`}>
+              <Link to={`./${post.slug}`}>
                 <Box display="flex" my="1">
                   {
                     (post?.frontMatter?.tags ?? []).map((tag: string) => (
@@ -40,4 +46,4 @@ export default function Posts() {
       }
     </Box>
   );
-}
+};

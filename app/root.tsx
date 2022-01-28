@@ -10,6 +10,12 @@ import type { MetaFunction } from "remix";
 
 import { ChakraProvider, Box } from "@chakra-ui/react";
 
+export const loader: LoaderFunction = () => {
+  return {
+    appName: process.env.APP_NAME
+  };
+}
+
 export const meta: MetaFunction = () => {
   return { title: "New Remix App" };
 };
