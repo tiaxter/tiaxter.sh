@@ -41,7 +41,7 @@ const components: any = {
   td: (props: any) => <Td {...props} />,
   th: (props: any) => <Th {...props} />,
   tr: (props: any) => <Tr {...props} />,
-  input: (props: any) => <Checkbox isDisabled defaultIsChecked={props.checked} {...props} />,
+  input: (props: any) => <Checkbox verticalAlign="middle" isDisabled defaultIsChecked={props.checked} {...props} />,
   p: (props: any) => <Text {...props} />,
   code: (props: any) => {
     const language = (props?.className ?? "").replace("language-", "")

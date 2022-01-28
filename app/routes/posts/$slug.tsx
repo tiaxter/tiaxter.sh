@@ -6,7 +6,7 @@ import {getPostData} from "~/posts.server";
 
 export const loader: LoaderFunction = async ({ params }) => {
   try {
-    return await getPostData(params?.slug ?? "");
+    return await getPostData(params.slug);
   } catch (e) {
     // If post not found load 404 page
     throw new Response("Not Found", {
@@ -17,7 +17,7 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 export const meta: MetaFunction = ({ data, parentsData }) => {
   return { 
-    title: `${data.frontmatter.meta.title} | ${parentsData.root.appName}` 
+    title: `${data?.frontmatter?.meta?.title ?? ""} | ${parentsData.root.appName}` 
   };
 };
 

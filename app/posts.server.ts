@@ -61,7 +61,7 @@ const getRehypeMdxCodeMeta = async () => {
   }
 }
 
-export async function getPostData(slug: string) {
+export async function getPostData(slug?: string) {
   const postPath: string = pathJoin(postsPath, `${slug}.mdx`);
   const source: string = readFile(postPath, "utf8");
 

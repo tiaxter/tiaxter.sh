@@ -37,7 +37,7 @@ export default function Index() {
       <Heading
         fontSize="3xl"
       >
-        👋Hey, sono Jerry!
+        👋&nbsp;Hey, sono Jerry!
       </Heading>
 
       <Image

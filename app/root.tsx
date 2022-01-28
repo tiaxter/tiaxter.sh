@@ -5,11 +5,12 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useCatch,
   useLoaderData,
 } from "remix";
 import type { MetaFunction, LoaderFunction } from "remix";
 
-import { ChakraProvider, Box, ColorModeScript, extendTheme } from "@chakra-ui/react";
+import { ChakraProvider, Box, Text, Image, Divider, ColorModeScript, extendTheme } from "@chakra-ui/react";
 import Navbar from "../components/Navbar";
 
 // Theme management with Chakra
@@ -51,12 +52,18 @@ export default function App() {
             flexDirection="column"
             minH="100vh"
             h="100vh"
-            mx="8"
+            w="100%"
+            px="10"
           >
               <ColorModeScript initialColorMode={theme.config.initialColorMode} />
               <Navbar githubName={data.githubName} />
-              <Box w="100%" h="100%" py="5" display="flex" justifyContent="center">
-                <Box maxW={{ xl: "5xl", lg: "4xl", md: "3xl", sm: "md", xs: "sm" }} w="100%">
+              <Box w="100%" h="100%">
+                <Box
+                  maxW={{ xl: "5xl", lg: "4xl", md: "3xl", sm: "md" }}
+                  h="100%"
+                  py="5"
+                  mx="auto"
+                >
                   <Outlet />
                 </Box>
               </Box>
@@ -68,4 +75,43 @@ export default function App() {
       </body>
     </html>
   );
+}
+
+export function CatchBoundary() {
+  const caught = useCatch();
+
+  return (
+    <html>
+      <head>
+        <title>Oops!</title>
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <ChakraProvider>
+          <Box
+            w="100%"
+            h="100vh"
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Image
+              src="/error.png"
+              objectFit="contain"
+              boxSize="150px"
+              my="10"
+            />
+            <Box display="flex" columnGap="5">
+              <Text fontSize="2xl">{caught.status}</Text>
+              <Divider orientation='vertical' />
+              <Text fontSize="2xl">{caught.statusText.toUpperCase()}</Text>
+            </Box>
+          </Box>
+        </ChakraProvider>
+        <Scripts />
+      </body>
+    </html>
+  )
 }
