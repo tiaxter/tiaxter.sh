@@ -1,4 +1,5 @@
 import BlogPost from "../../../components/BlogPost";
+import { Box } from "@chakra-ui/react";
 import { LoaderFunction, useLoaderData } from "remix";
 import type { MetaFunction } from "remix";
 import {getPostData} from "~/posts.server";
@@ -24,8 +25,8 @@ export default function PostSlug() {
   const { code, frontMatter }: any = useLoaderData();
 
   return (
-    <div>
+    <Box pb="5">
       <BlogPost code={code} frontMatter={frontMatter} />
-    </div>
+    </Box>
   )
 }

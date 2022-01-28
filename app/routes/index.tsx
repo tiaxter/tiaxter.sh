@@ -1,32 +1,54 @@
+import { Box, Heading, Image, Text } from "@chakra-ui/react";
+import { useLoaderData } from "remix";
+import type { LoaderFunction } from "remix";
+import { FiLinkedin, FiMail, FiInstagram, FiSend } from "react-icons/fi";
+import SocialButton from "../../components/SocialButton";
+
+export const loader: LoaderFunction = () => {
+  return {
+    instagramProfile: process.env.INSTAGRAM_PROFILE,
+    linkedinProfile: process.env.LINKEDIN_PROFILE,
+    telegramProfile: process.env.TELEGRAM_PROFILE,
+    email: process.env.PERSONAL_EMAIL,
+  };
+};
+
 export default function Index() {
+  const data = useLoaderData();
+
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
-      <h1>Welcome to Remix</h1>
-      <ul>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
-          >
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
-      </ul>
-    </div>
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      rowGap="10"
+      p="10"
+      h="100%"
+      minH="100%"
+    >
+      <Heading fontSize="5xl">👋Hey, sono Jerry!</Heading>
+      <Image
+        src="./me.jpg"
+        borderRadius="full"
+        objectFit="cover"
+        boxSize="150px"
+      />
+      <Text>Sono un Full Stack Developer e vivo a Milano, Italia</Text>
+      <Box display="flex" flexDirection="column" rowGap="2">
+        <Heading fontSize="xl">Seguimi sui miei social:</Heading>
+        <Box 
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          columnGap="3"
+        >
+          <SocialButton link={`mailto:${data.email}`} icon={<FiMail />} />
+          <SocialButton link={data.linkedinProfile} icon={<FiLinkedin />} />
+          <SocialButton link={data.telegramProfile} icon={<FiSend />} />
+          <SocialButton link={data.instagramProfile} icon={<FiInstagram />} />
+        </Box>
+      </Box>
+    </Box>
   );
 }

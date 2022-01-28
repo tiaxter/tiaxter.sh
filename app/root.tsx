@@ -43,12 +43,20 @@ export default function App() {
       </head>
       <body>
         <ChakraProvider>
-          <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-          <Navbar githubName={data.githubName} />
-          <Box w="100%" mx="auto" py="5">
-            <Box maxW={{ xl: "5xl", lg: "4xl", md: "3xl", sm: "md" }} mx="auto">
-              <Outlet />
-            </Box>
+          <Box
+            id="app"
+            display="flex"
+            flexDirection="column"
+            minH="100vh"
+            h="100vh"
+          >
+              <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+              <Navbar githubName={data.githubName} />
+              <Box w="100%" h="100%" py="5" display="flex" justifyContent="center">
+                <Box maxW={{ xl: "5xl", lg: "4xl", md: "3xl", sm: "md" }} w="100%">
+                  <Outlet />
+                </Box>
+              </Box>
           </Box>
         </ChakraProvider>
         <ScrollRestoration />
