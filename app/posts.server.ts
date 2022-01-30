@@ -21,7 +21,7 @@ export function getPosts(){
         return {
           frontMatter: {
             ...frontMatter,
-            date: moment(frontMatter.date).format("LLL"),
+            date: moment(frontMatter.date).format("LL"),
           },
           slug: filename.split(".")[0],
           excerpt,
@@ -84,7 +84,10 @@ export async function getPostData(slug?: string) {
   return {
     slug,
     code,
-    frontmatter,
+    frontmatter: {
+      ...frontmatter,
+      date: moment(frontmatter.date).format("LL"),
+    },
   };
 }
 

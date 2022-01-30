@@ -30,6 +30,7 @@ export default function PostCard({ slug, title, tags, date, excerpt}: Prop) {
         </Box>
         <Heading size="xl">{title}</Heading>
         <Text fontSize="xs" color="gray.500">{date}</Text>
+        {excerpt && <Text>{excerpt}...</Text>}
       </Link>
     </Box>
   )

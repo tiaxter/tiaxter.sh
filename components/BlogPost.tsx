@@ -17,6 +17,7 @@ import {
   Tag,
   Box,
   Divider,
+  Image,
 } from "@chakra-ui/react";
 import CodeBlock from "./CodeBlock";
 import PostTag from "./PostTag";
@@ -62,7 +63,13 @@ export default function BlogPost({code, frontmatter}: Prop) {
 
   return (
     <div>
-      <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
+      <Box
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+        rowGap="5"
+      >
         <Box w="auto">
           <Box display="flex" w="100%">
             {
@@ -71,7 +78,17 @@ export default function BlogPost({code, frontmatter}: Prop) {
           </Box>
           <Heading fontSize="5xl">{frontmatter?.meta?.title ?? ""}</Heading>
         </Box>
+        { 
+          frontmatter.image &&
+          <Image
+            src={frontmatter.image}
+            w="50%"
+            borderRadius="lg"
+          />
+        }
+        <Text fontSize="xs" color="gray.500">{frontmatter.date}</Text>
       </Box>
+
       <Divider my="10" />
       <Component components={components} />
     </div>
