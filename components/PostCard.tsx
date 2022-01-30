@@ -1,4 +1,4 @@
-import { Box, Heading, Tag, Text } from "@chakra-ui/react";
+import { Box, Heading, Text } from "@chakra-ui/react";
 import PostTag from "./PostTag";
 import { Link } from "remix"
 
@@ -13,6 +13,8 @@ type Prop = {
 export default function PostCard({ slug, title, tags, date, excerpt}: Prop) {
   return (
     <Box
+      as={Link}
+      to={`./${slug}`}
       w="100%"
       display="flex"
       flexDirection="column"
@@ -22,16 +24,14 @@ export default function PostCard({ slug, title, tags, date, excerpt}: Prop) {
       style={{ transition: ".5s ease all"}}
       _hover={{ boxShadow: "xl", transition: "1s ease all" }}
     >
-      <Link to={`./${slug}`}>
-        <Box display="flex" my="1">
-          {
-            (tags ?? []).map((tag: string) => <PostTag key={tag} tag={tag} />)
-          }
-        </Box>
-        <Heading size="xl">{title}</Heading>
-        <Text fontSize="xs" color="gray.500">{date}</Text>
-        {excerpt && <Text>{excerpt}...</Text>}
-      </Link>
+      <Box display="flex" my="1">
+        {
+          (tags ?? []).map((tag: string) => <PostTag key={tag} tag={tag} />)
+        }
+      </Box>
+      <Heading size="xl">{title}</Heading>
+      <Text fontSize="xs" color="gray.500">{date}</Text>
+      {excerpt && <Text>{excerpt}...</Text>}
     </Box>
   )
 }
