@@ -76,13 +76,14 @@ export default function BlogPost({code, frontmatter}: Prop) {
               frontmatter?.tags.map( (tag: string) => <PostTag key={tag} tag={tag} />)
             }
           </Box>
-          <Heading fontSize="5xl">{frontmatter?.meta?.title ?? ""}</Heading>
+    
+          <Heading fontSize="3xl">{frontmatter?.meta?.title ?? ""}</Heading>
         </Box>
         { 
           frontmatter.image &&
           <Image
             src={frontmatter.image}
-            w="50%"
+            w={{ xl: "50%", lg: "50%", md: "50%", sm: "75%" }}
             borderRadius="lg"
           />
         }
