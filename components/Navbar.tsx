@@ -1,6 +1,12 @@
-import { Box, Image, Button, Link as ChakraLink, useColorMode } from "@chakra-ui/react";
-import { Link } from "remix";
-import { GitHubLogoIcon, SunIcon, MoonIcon } from "@radix-ui/react-icons"
+import {
+  Box,
+  Image,
+  Button,
+  Link as ChakraLink,
+  useColorMode,
+} from '@chakra-ui/react';
+import { Link } from 'remix';
+import { GitHubLogoIcon, SunIcon, MoonIcon } from '@radix-ui/react-icons';
 
 export default function Navbar({ githubName }: any) {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -23,19 +29,25 @@ export default function Navbar({ githubName }: any) {
         </Link>
       </Box>
 
-      <Box
-        display="flex"
-        columnGap="5"
-      >
-        <Button variant="link" to="/" as={Link}>Home</Button>
-        <Button variant="link" to="/posts" as={Link}>Post</Button>
-        <Button variant="ghost" href={`https://www.github.com/${githubName}`} size="sm" as={ChakraLink}>
+      <Box display="flex" columnGap="5">
+        <Button variant="link" to="/" as={Link}>
+          Home
+        </Button>
+        <Button variant="link" to="/posts" as={Link}>
+          Post
+        </Button>
+        <Button
+          variant="ghost"
+          href={`https://www.github.com/${githubName}`}
+          size="sm"
+          as={ChakraLink}
+        >
           <GitHubLogoIcon />
         </Button>
         <Button size="sm" onClick={toggleColorMode}>
-          {colorMode === "light" ? <SunIcon /> : <MoonIcon />}
+          {colorMode === 'light' ? <SunIcon /> : <MoonIcon />}
         </Button>
       </Box>
     </Box>
-  )
+  );
 }

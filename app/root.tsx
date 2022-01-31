@@ -7,11 +7,19 @@ import {
   ScrollRestoration,
   useCatch,
   useLoaderData,
-} from "remix";
-import type { MetaFunction, LoaderFunction } from "remix";
+} from 'remix';
+import type { MetaFunction, LoaderFunction } from 'remix';
 
-import { ChakraProvider, Box, Text, Image, Divider, ColorModeScript, extendTheme } from "@chakra-ui/react";
-import Navbar from "../components/Navbar";
+import {
+  ChakraProvider,
+  Box,
+  Text,
+  Image,
+  Divider,
+  ColorModeScript,
+  extendTheme,
+} from '@chakra-ui/react';
+import Navbar from '../components/Navbar';
 
 // Theme management with Chakra
 const theme = extendTheme({
@@ -27,10 +35,10 @@ export const loader: LoaderFunction = () => {
     appName: process.env.APP_NAME,
     githubName: process.env.GITHUB_NAME,
   };
-}
+};
 
 export const meta: MetaFunction = () => {
-  return { title: "Remix App" };
+  return { title: 'Remix App' };
 };
 
 export default function App() {
@@ -55,24 +63,24 @@ export default function App() {
             w="100%"
             px="10"
           >
-              <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-              <Navbar githubName={data.githubName} />
-              <Box w="100%" h="100%">
-                <Box
-                  maxW={{ xl: "5xl", lg: "4xl", md: "3xl", sm: "md" }}
-                  h="100%"
-                  py="5"
-                  mx="auto"
-                >
-                  <Outlet />
-                </Box>
+            <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+            <Navbar githubName={data.githubName} />
+            <Box w="100%" h="100%">
+              <Box
+                maxW={{ xl: '5xl', lg: '4xl', md: '3xl', sm: 'md' }}
+                h="100%"
+                py="5"
+                mx="auto"
+              >
+                <Outlet />
               </Box>
+            </Box>
           </Box>
         </ChakraProvider>
         <ScrollRestoration />
         <Scripts />
         <script>const global = globalThis;</script>
-        {process.env.NODE_ENV === "development" && <LiveReload />}
+        {process.env.NODE_ENV === 'development' && <LiveReload />}
       </body>
     </html>
   );
@@ -106,7 +114,7 @@ export function CatchBoundary() {
             />
             <Box display="flex" columnGap="5">
               <Text fontSize="2xl">{caught.status}</Text>
-              <Divider orientation='vertical' />
+              <Divider orientation="vertical" />
               <Text fontSize="2xl">{caught.statusText.toUpperCase()}</Text>
             </Box>
           </Box>
@@ -114,5 +122,5 @@ export function CatchBoundary() {
         <Scripts />
       </body>
     </html>
-  )
+  );
 }

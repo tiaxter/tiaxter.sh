@@ -1,5 +1,5 @@
-import { useMemo } from "react"
-import { getMDXComponent } from "mdx-bundler/client";
+import { useMemo } from 'react';
+import { getMDXComponent } from 'mdx-bundler/client';
 import {
   Heading,
   Link,
@@ -18,14 +18,14 @@ import {
   Box,
   Divider,
   Image,
-} from "@chakra-ui/react";
-import CodeBlock from "./CodeBlock";
-import PostTag from "./PostTag";
+} from '@chakra-ui/react';
+import CodeBlock from './CodeBlock';
+import PostTag from './PostTag';
 
 type Prop = {
-  code: string,
-  frontmatter: any,
-}
+  code: string;
+  frontmatter: any;
+};
 
 // Override markdown vanilla components with Chakra components
 const components: any = {
@@ -45,26 +45,36 @@ const components: any = {
   td: (props: any) => <Td {...props} />,
   th: (props: any) => <Th {...props} />,
   tr: (props: any) => <Tr {...props} />,
-  input: (props: any) => <Checkbox verticalAlign="middle" isDisabled defaultIsChecked={props.checked} {...props} />,
+  input: (props: any) => (
+    <Checkbox
+      verticalAlign="middle"
+      isDisabled
+      defaultIsChecked={props.checked}
+      {...props}
+    />
+  ),
   p: (props: any) => <Text {...props} />,
   code: (props: any) => {
-    const language = (props?.className ?? "").replace("language-", "")
+    const language = (props?.className ?? '').replace('language-', '');
 
-    let code = props?.children ?? "";
+    let code = props?.children ?? '';
     // Remove last endline character
-    code = code.slice(0, code.lastIndexOf("\n"))
+    code = code.slice(0, code.lastIndexOf('\n'));
 
-    return language != "" ?
-    <CodeBlock
-      language={language}
-      code={code}
-      filename={props?.filename}
-      highlight={props?.highlight ?? props?.lines}
-    /> : <Tag {...props}/>
-  }
-}
+    return language != '' ? (
+      <CodeBlock
+        language={language}
+        code={code}
+        filename={props?.filename}
+        highlight={props?.highlight ?? props?.lines}
+      />
+    ) : (
+      <Tag {...props} />
+    );
+  },
+};
 
-export default function BlogPost({code, frontmatter}: Prop) {
+export default function BlogPost({ code, frontmatter }: Prop) {
   const Component = useMemo(() => getMDXComponent(code), [code]);
 
   return (
@@ -78,26 +88,29 @@ export default function BlogPost({code, frontmatter}: Prop) {
       >
         <Box w="auto">
           <Box display="flex" w="100%">
-            {
-              frontmatter?.tags.map( (tag: string) => <PostTag key={tag} tag={tag} />)
-            }
+            {frontmatter?.tags.map((tag: string) => (
+              <PostTag key={tag} tag={tag} />
+            ))}
           </Box>
-    
-          <Heading fontSize={{ base: "3xl", xl: "5xl", lg: "5xl" }}>{frontmatter?.meta?.title ?? ""}</Heading>
+
+          <Heading fontSize={{ base: '3xl', xl: '5xl', lg: '5xl' }}>
+            {frontmatter?.meta?.title ?? ''}
+          </Heading>
         </Box>
-        { 
-          frontmatter.image &&
+        {frontmatter.image && (
           <Image
             src={frontmatter.image}
-            w={{ xl: "50%", lg: "50%", md: "50%", sm: "75%" }}
+            w={{ xl: '50%', lg: '50%', md: '50%', sm: '75%' }}
             borderRadius="lg"
           />
-        }
-        <Text fontSize="xs" color="gray.500">{frontmatter.date}</Text>
+        )}
+        <Text fontSize="xs" color="gray.500">
+          {frontmatter.date}
+        </Text>
       </Box>
 
       <Divider my="10" />
       <Component components={components} />
     </div>
-  )
+  );
 }

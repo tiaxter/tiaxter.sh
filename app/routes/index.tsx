@@ -1,8 +1,8 @@
-import { Box, Heading, Image, Text } from "@chakra-ui/react";
-import { useLoaderData } from "remix";
-import type { LoaderFunction, MetaFunction } from "remix";
-import { FiLinkedin, FiMail, FiInstagram, FiSend } from "react-icons/fi";
-import SocialButton from "../../components/SocialButton";
+import { Box, Heading, Image, Text } from '@chakra-ui/react';
+import { useLoaderData } from 'remix';
+import type { LoaderFunction, MetaFunction } from 'remix';
+import { FiLinkedin, FiMail, FiInstagram, FiSend } from 'react-icons/fi';
+import SocialButton from '../../components/SocialButton';
 
 // Load env variables
 export const loader: LoaderFunction = () => {
@@ -16,7 +16,7 @@ export const loader: LoaderFunction = () => {
 
 export const meta: MetaFunction = ({ parentsData }) => {
   return {
-    title: `Home | ${parentsData.root.appName}`
+    title: `Home | ${parentsData.root.appName}`,
   };
 };
 
@@ -34,11 +34,7 @@ export default function Index() {
       h="100%"
       minH="100%"
     >
-      <Heading
-        fontSize="3xl"
-      >
-        👋&nbsp;Hey, sono Jerry!
-      </Heading>
+      <Heading fontSize="3xl">👋&nbsp;Hey, sono Jerry!</Heading>
 
       <Image
         src="./me.jpg"
@@ -49,7 +45,7 @@ export default function Index() {
       <Text>Sono un Full Stack Developer e vivo a Milano, Italia</Text>
       <Box display="flex" flexDirection="column" rowGap="2">
         <Heading fontSize="xl">Seguimi sui miei social:</Heading>
-        <Box 
+        <Box
           display="flex"
           justifyContent="center"
           alignItems="center"

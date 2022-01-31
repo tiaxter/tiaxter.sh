@@ -1,77 +1,80 @@
-import { join as pathJoin } from "path";
-import { read as matterRead } from "gray-matter";
-import { readdirSync as readDir, readFileSync as readFile } from "fs";
-import { bundleMDX } from "mdx-bundler";
-import moment from "moment";
-import "moment/locale/it";
+import { join as pathJoin } from 'path';
+import { read as matterRead } from 'gray-matter';
+import { readdirSync as readDir, readFileSync as readFile } from 'fs';
+import { bundleMDX } from 'mdx-bundler';
+import moment from 'moment';
+import 'moment/locale/it';
 
-moment.locale("it");
+moment.locale('it');
 
-const postsPath = pathJoin(__dirname, "..", "posts");
+const postsPath = pathJoin(__dirname, '..', 'posts');
 
-export function getPosts(){
+export function getPosts() {
   const postsFiles = readDir(postsPath);
 
   return postsFiles
-    .map(filename => {
-        const filepath = pathJoin(postsPath, filename);
+    .map((filename: string) => {
+      const filepath = pathJoin(postsPath, filename);
 
-        const { data: frontMatter } = matterRead(filepath);
+      const { data: frontMatter } = matterRead(filepath);
 
-        return {
-          frontMatter: {
-            ...frontMatter,
-            date: moment(frontMatter.date).format("LL"),
-            publishedAt: frontMatter.date,
-          },
-          slug: filename.split(".")[0],
-          excerpt: frontMatter?.excerpt,
-        };
-     })
+      return {
+        frontMatter: {
+          ...frontMatter,
+          date: moment(frontMatter.date).format('LL'),
+          publishedAt: frontMatter.date,
+        },
+        slug: filename.split('.')[0],
+        excerpt: frontMatter?.excerpt,
+      };
+    })
     .sort((prev, next) => {
       // Sort posts by date descending
-      return moment(next.frontMatter.publishedAt).valueOf() - moment(prev.frontMatter.publishedAt).valueOf();
+      return (
+        moment(next.frontMatter.publishedAt).valueOf() -
+        moment(prev.frontMatter.publishedAt).valueOf()
+      );
     });
 }
 
 // Function to read Code Block metadata
 // https://github.com/Arcath/arcath.net-next/blob/main/lib/functions/prepare-mdx.ts#L5-L33
 const getRehypeMdxCodeMeta = async () => {
-  const {visit} = await import('unist-util-visit')
+  const { visit } = await import('unist-util-visit');
 
   return (options = {}) => {
-    return tree => {
-      visit(tree, 'element', visitor)
-    }
+    return (tree) => {
+      visit(tree, 'element', visitor);
+    };
 
     function visitor(node, index, parentNode) {
       if (node.tagName === 'code' && node.data && node.data.meta) {
-        const blocks = node.data.meta.split(' ') as string[]
+        const blocks = node.data.meta.split(' ') as string[];
 
         node.properties = blocks.reduce((props, block) => {
-          const [prop, value] = block.split('=')
+          const [prop, value] = block.split('=');
 
           if (typeof value === 'undefined') {
-            props.line = prop
+            props.line = prop;
 
-            return props
+            return props;
           }
 
-          props[prop] = value.replaceAll('"', "")
+          props[prop] = value.replaceAll('"', '');
 
-          return props
-        }, node.properties)
+          return props;
+        }, node.properties);
       }
     }
-  }
-}
+  };
+};
 
 export async function getPostData(slug?: string) {
   const postPath: string = pathJoin(postsPath, `${slug}.mdx`);
-  const source: string = readFile(postPath, "utf8");
+  const source: string = readFile(postPath, 'utf8');
 
-  const gfm = await import("remark-gfm").then(mod => mod.default);
-  const rehypeMdxCodeMeta = await getRehypeMdxCodeMeta()
+  const gfm = await import('remark-gfm').then((mod) => mod.default);
+  const rehypeMdxCodeMeta = await getRehypeMdxCodeMeta();
 
   const { code, frontmatter } = await bundleMDX({
     source,
@@ -83,7 +86,7 @@ export async function getPostData(slug?: string) {
       ];
 
       return options;
-    }
+    },
   });
 
   return {
@@ -91,13 +94,13 @@ export async function getPostData(slug?: string) {
     code,
     frontmatter: {
       ...frontmatter,
-      date: moment(frontmatter.date).format("LL"),
+      date: moment(frontmatter.date).format('LL'),
     },
   };
 }
 
 export type Post = {
-  slug: string,
-  frontMatter: any,
-  excerpt: string,
-}
+  slug: string;
+  frontMatter: any;
+  excerpt: string;
+};
