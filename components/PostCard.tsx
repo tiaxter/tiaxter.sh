@@ -1,4 +1,4 @@
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Box, Heading, Text, useColorModeValue } from "@chakra-ui/react";
 import PostTag from "./PostTag";
 import { Link } from "remix"
 
@@ -11,6 +11,9 @@ type Prop = {
 }
 
 export default function PostCard({ slug, title, tags, date, excerpt}: Prop) {
+  const boxShadow = useColorModeValue("lg", "dark-lg");
+  const boxShadowHover = useColorModeValue("xl", boxShadow);
+
   return (
     <Box
       as={Link}
@@ -18,11 +21,11 @@ export default function PostCard({ slug, title, tags, date, excerpt}: Prop) {
       w="100%"
       display="flex"
       flexDirection="column"
-      boxShadow="lg"
+      boxShadow={boxShadow}
       p="4"
       borderRadius="lg"
       style={{ transition: ".5s ease all"}}
-      _hover={{ boxShadow: "xl", transition: "1s ease all" }}
+      _hover={{ boxShadow: boxShadowHover, transition: "1s ease all" }}
     >
       <Box display="flex" my="1">
         {
