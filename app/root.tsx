@@ -8,7 +8,7 @@ import {
   useCatch,
   useLoaderData,
 } from "remix";
-import type { MetaFunction, LoaderFunction } from "remix";
+import type { MetaFunction, LoaderFunction, LinksFunction } from "remix";
 
 import { ChakraProvider, Box, Text, Image, Divider, ColorModeScript, extendTheme } from "@chakra-ui/react";
 import Navbar from "../components/Navbar";
@@ -28,6 +28,15 @@ export const loader: LoaderFunction = () => {
     githubName: process.env.GITHUB_NAME,
   };
 }
+
+export const links: LinksFunction = () => {
+  return [
+    {
+      rel: "stylesheet",
+      href: "https://cdnjs.cloudflare.com/ajax/libs/firacode/5.2.0/fira_code.min.css",
+    },
+  ];
+};
 
 export const meta: MetaFunction = () => {
   return { title: "Remix App" };
@@ -71,6 +80,7 @@ export default function App() {
         </ChakraProvider>
         <ScrollRestoration />
         <Scripts />
+        <script>const global = globalThis;</script>
         {process.env.NODE_ENV === "development" && <LiveReload />}
       </body>
     </html>

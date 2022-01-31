@@ -54,7 +54,13 @@ const components: any = {
     // Remove last endline character
     code = code.slice(0, code.lastIndexOf("\n"))
 
-    return language != "" ? <CodeBlock language={language} code={code} filename={props?.filename}/> : <Tag {...props}/>
+    return language != "" ?
+    <CodeBlock
+      language={language}
+      code={code}
+      filename={props?.filename}
+      highlight={props?.highlight ?? props?.lines}
+    /> : <Tag {...props}/>
   }
 }
 
@@ -77,7 +83,7 @@ export default function BlogPost({code, frontmatter}: Prop) {
             }
           </Box>
     
-          <Heading fontSize="3xl">{frontmatter?.meta?.title ?? ""}</Heading>
+          <Heading fontSize={{ base: "3xl", xl: "5xl", lg: "5xl" }}>{frontmatter?.meta?.title ?? ""}</Heading>
         </Box>
         { 
           frontmatter.image &&

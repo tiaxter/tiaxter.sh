@@ -1,20 +1,19 @@
-import { Prism as ReactSyntaxHighlighter } from "react-syntax-highlighter";
+import { CodeBlock as CodeSyntaxHighlighter, atomOneDark, atomOneLight } from "react-code-blocks";
 import { Box, Text, Button, useColorModeValue, useClipboard } from "@chakra-ui/react";
-import { materialOceanic, materialLight } from "react-syntax-highlighter/dist/cjs/styles/prism"
 import { CopyIcon, CheckIcon } from "@radix-ui/react-icons";
 import chroma from "chroma-js";
 
 type Prop = {
   code: string,
   language: string,
-  filename?: string
+  filename?: string,
+  highlight?: string,
 }
 
-export default function CodeBlock({code, language, filename}: Prop) {
-  const theme = useColorModeValue(materialLight, materialOceanic)
+export default function CodeBlock({code, language, filename, highlight}: Prop) {
+  const theme: any = useColorModeValue(atomOneLight, atomOneDark);
   const textColor = useColorModeValue("black", "whiteAlpha.900");
-  const themeStyle: any = theme?.['code[class*="language-"]'] ?? theme?.['pre[class*="language-"]'];
-  const backgroundColor = themeStyle?.background ?? themeStyle?.backgroundColor ?? "#000";
+  const backgroundColor = theme?.backgroundColor ?? "#000";
   const { hasCopied, onCopy} = useClipboard(code);
 
   return (
@@ -30,7 +29,7 @@ export default function CodeBlock({code, language, filename}: Prop) {
     >
       <Box
         w="100%"
-        py=".5em"
+        py=".25em"
         px="1em"
         display="flex"
         alignItems="center"
@@ -50,9 +49,18 @@ export default function CodeBlock({code, language, filename}: Prop) {
           { hasCopied ? <CheckIcon/> : <CopyIcon />}
         </Button>
       </Box>
-      <ReactSyntaxHighlighter language={language} style={theme} showLineNumbers>
-        {code}
-      </ReactSyntaxHighlighter>
+      <CodeSyntaxHighlighter
+        text={code}
+        language={language}
+        theme={theme}
+        highlight={highlight ?? ""}
+        showLineNumbers
+        customStyle={{
+          fontFamily: "Fira Code",
+          borderBottomRightRadius: "0.5rem",
+          borderBottomLeftRadius: "0.5rem",
+        }}
+      />
     </Box>
   )
 }
