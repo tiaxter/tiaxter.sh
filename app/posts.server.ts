@@ -22,11 +22,16 @@ export function getPosts(){
           frontMatter: {
             ...frontMatter,
             date: moment(frontMatter.date).format("LL"),
+            publishedAt: frontMatter.date,
           },
           slug: filename.split(".")[0],
           excerpt,
         };
-     });
+     })
+    .sort((prev, next) => {
+      // Sort posts by date descending
+      return moment(next.frontMatter.publishedAt).valueOf() - moment(prev.frontMatter.publishedAt).valueOf();
+    });
 }
 
 // Function to read Code Block metadata
