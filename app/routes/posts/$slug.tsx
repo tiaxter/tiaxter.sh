@@ -1,7 +1,7 @@
 import BlogPost from "../../../components/BlogPost";
 import { Box } from "@chakra-ui/react";
-import { LoaderFunction, useLoaderData } from "remix";
-import type { MetaFunction } from "remix";
+import { useLoaderData } from "remix";
+import type { MetaFunction, LinksFunction, LoaderFunction } from "remix";
 import {getPostData} from "~/posts.server";
 
 export const loader: LoaderFunction = async ({ params }) => {
@@ -14,6 +14,15 @@ export const loader: LoaderFunction = async ({ params }) => {
     });
   }
 }
+
+export const links: LinksFunction = () => {
+  return [
+    {
+      rel: "stylesheet",
+      href: "https://cdnjs.cloudflare.com/ajax/libs/firacode/5.2.0/fira_code.min.css",
+    },
+  ];
+};
 
 export const meta: MetaFunction = ({ data, parentsData }) => {
   return { 

@@ -27,7 +27,7 @@ export default function Posts() {
             title={post.frontMatter.meta.title}
             tags={post?.frontMatter?.tags}
             date={post.frontMatter.date}
-            excerpt={post.frontMatter.excerpt}
+            excerpt={post?.excerpt}
           />
         ))
       }

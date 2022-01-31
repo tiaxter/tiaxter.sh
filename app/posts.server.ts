@@ -16,7 +16,7 @@ export function getPosts(){
     .map(filename => {
         const filepath = pathJoin(postsPath, filename);
 
-        const { data: frontMatter, excerpt } = matterRead(filepath, {excerpt: true});
+        const { data: frontMatter } = matterRead(filepath);
 
         return {
           frontMatter: {
@@ -25,7 +25,7 @@ export function getPosts(){
             publishedAt: frontMatter.date,
           },
           slug: filename.split(".")[0],
-          excerpt,
+          excerpt: frontMatter?.excerpt,
         };
      })
     .sort((prev, next) => {
