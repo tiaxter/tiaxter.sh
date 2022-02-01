@@ -67,7 +67,7 @@ export default function App() {
             <Navbar githubName={data.githubName} />
             <Box w="100%" h="100%">
               <Box
-                maxW={{ xl: '5xl', lg: '4xl', md: '3xl', sm: 'md' }}
+                maxW={{ xl: '5xl', lg: '4xl', md: '3xl', sm: 'xl' }}
                 h="100%"
                 py="5"
                 mx="auto"
