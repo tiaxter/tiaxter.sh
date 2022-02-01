@@ -23,6 +23,7 @@ export default function Navbar({ githubName }: any) {
         <Link to="/">
           <Image
             borderRadius="full"
+            boxShadow="lg"
             src={`https://github.com/${githubName}.png`}
             h="100%"
           />
