@@ -26,16 +26,18 @@ export default function Posts() {
       <Heading w="100%" my="5">
         Posts
       </Heading>
-      {posts.map((post: Post) => (
-        <PostCard
-          key={post.slug}
-          slug={post.slug}
-          title={post.frontMatter.meta.title}
-          tags={post?.frontMatter?.tags}
-          date={post.frontMatter.date}
-          excerpt={post?.excerpt}
-        />
-      ))}
+      <Box display="flex" flexDirection="column" w="100%" rowGap="5">
+        {posts.map((post: Post) => (
+          <PostCard
+            key={post.slug}
+            slug={post.slug}
+            title={post.frontMatter.meta.title}
+            tags={post?.frontMatter?.tags}
+            date={post.frontMatter.date}
+            excerpt={post?.excerpt}
+          />
+        ))}
+      </Box>
     </Box>
   );
 }
