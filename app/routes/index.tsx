@@ -50,6 +50,7 @@ export default function Index() {
           style={{
             animation: 'shake 0.5s',
             animationIterationCount: 'infinite',
+            userSelect: 'none',
           }}
         >
           👋
