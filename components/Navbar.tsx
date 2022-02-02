@@ -21,12 +21,7 @@ export default function Navbar({ githubName }: any) {
     >
       <Box h="50%">
         <Link to="/">
-          <Image
-            borderRadius="full"
-            boxShadow="lg"
-            src={`https://github.com/${githubName}.png`}
-            h="100%"
-          />
+          <Image borderRadius="full" boxShadow="lg" src="/logo.jpg" h="100%" />
         </Link>
       </Box>
 
