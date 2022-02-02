@@ -2,6 +2,9 @@ import { join as pathJoin } from 'path';
 import { read as matterRead } from 'gray-matter';
 import { readdirSync as readDir, readFileSync as readFile } from 'fs';
 import { bundleMDX } from 'mdx-bundler';
+import { getMDXComponent } from 'mdx-bundler/client';
+import { Feed } from 'feed';
+import { renderToString } from 'react-dom/server';
 import moment from 'moment';
 import 'moment/locale/it';
 
@@ -95,6 +98,7 @@ export async function getPostData(slug?: string) {
     frontmatter: {
       ...frontmatter,
       date: moment(frontmatter.date).format('LL'),
+      rawDate: frontmatter.date,
     },
   };
 }
@@ -104,3 +108,48 @@ export type Post = {
   frontMatter: any;
   excerpt: string;
 };
+
+export async function generateFeed() {
+  const posts = await getPosts();
+
+  const baseURL: string = 'https://tiaxter.sh';
+  const author = {
+    name: 'Gerardo Palmiotto',
+    email: process.env.PERSONAL_EMAIL,
+    link: process.env.INSTAGRAM_PROFILE,
+  };
+
+  const feed = new Feed({
+    title: process.env.APP_NAME,
+    description: '',
+    id: baseURL,
+    link: baseURL,
+    language: 'it',
+    image: `${baseURL}/logo.jpg`,
+    favicon: `${baseURL}/favicon.ico`,
+    feedLink: {
+      rss2: `${baseURL}/feed.xml`,
+      json1: `${baseURL}/feed.json`,
+    },
+    author,
+  });
+
+  for (let post of posts) {
+    const postData = await getPostData(post.slug);
+    const url = `${baseURL}/posts/${post.slug}`;
+
+    const Component = getMDXComponent(postData.code);
+
+    feed.addItem({
+      title: postData.frontmatter.meta.title,
+      id: url,
+      link: url,
+      description: postData.frontmatter.excerpt,
+      content: renderToString(<Component />),
+      author: [author],
+      date: postData.frontmatter.rawDate,
+    });
+  }
+
+  return feed;
+}
