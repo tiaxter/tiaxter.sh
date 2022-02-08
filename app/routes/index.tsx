@@ -44,7 +44,7 @@ export default function Index() {
       h="100%"
       minH="100%"
     >
-      <Box display="flex" columnGap="2">
+      <Box display="flex" columnGap="2" className="rythm-bass">
         <Heading
           fontSize="3xl"
           style={{
@@ -63,9 +63,17 @@ export default function Index() {
         borderRadius="full"
         objectFit="cover"
         boxSize="150px"
+        className="rythm-bass"
       />
-      <Text>Sono un Full Stack Developer e vivo a Milano, Italia</Text>
-      <Box display="flex" flexDirection="column" rowGap="2">
+      <Text className="rythm-bass">
+        Sono un Full Stack Developer e vivo a Milano, Italia
+      </Text>
+      <Box
+        display="flex"
+        flexDirection="column"
+        rowGap="2"
+        className="rythm-bass"
+      >
         <Heading fontSize="xl">Seguimi sui miei social:</Heading>
         <Box
           display="flex"

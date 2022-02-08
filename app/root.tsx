@@ -107,12 +107,13 @@ export function CatchBoundary() {
             alignItems="center"
           >
             <Image
+              className="rythm-bass"
               src="/error.png"
               objectFit="contain"
               boxSize="150px"
               my="10"
             />
-            <Box display="flex" columnGap="5">
+            <Box display="flex" columnGap="5" className="rythm-bass">
               <Text fontSize="2xl">{caught.status}</Text>
               <Divider orientation="vertical" />
               <Text fontSize="2xl">{caught.statusText.toUpperCase()}</Text>

@@ -16,6 +16,7 @@ export default function PostCard({ slug, title, tags, date, excerpt }: Prop) {
 
   return (
     <Box
+      className="rythm-bass"
       as={Link}
       to={`./${slug}`}
       w="100%"

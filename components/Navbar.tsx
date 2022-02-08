@@ -19,13 +19,13 @@ export default function Navbar({ githubName }: any) {
       alignItems="center"
       justifyContent="space-between"
     >
-      <Box h="50%">
+      <Box h="50%" className="rythm-bass">
         <Link to="/">
           <Image borderRadius="full" boxShadow="lg" src="/logo.jpg" h="100%" />
         </Link>
       </Box>
 
-      <Box display="flex" columnGap="5">
+      <Box display="flex" columnGap="5" className="rythm-bass">
         <Button variant="link" to="/" as={Link}>
           Home
         </Button>
