@@ -3,7 +3,7 @@ import type { MetaFunction } from 'remix';
 import { getPosts } from '../../posts.server';
 import type { Post } from '../../posts.server';
 import { Box, Heading } from '@chakra-ui/react';
-import PostCard from '../../../components/PostCard';
+import PostCard from '~/components/PostCard';
 
 export const loader = getPosts;
 

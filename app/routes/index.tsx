@@ -2,7 +2,7 @@ import { Box, Heading, Image, Text } from '@chakra-ui/react';
 import { useLoaderData } from 'remix';
 import type { LoaderFunction, MetaFunction, LinksFunction } from 'remix';
 import { FiLinkedin, FiMail, FiInstagram, FiSend } from 'react-icons/fi';
-import SocialButton from '../../components/SocialButton';
+import SocialButton from '~/components/SocialButton';
 import styles from '~/styles/app.css';
 
 // Load env variables
