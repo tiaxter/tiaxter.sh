@@ -1,4 +1,4 @@
-import BlogPost from '~/components/BlogPost';
+import BlogPost from '../../../components/BlogPost';
 import { Box } from '@chakra-ui/react';
 import { useLoaderData } from 'remix';
 import type { MetaFunction, LinksFunction, LoaderFunction } from 'remix';

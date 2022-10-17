@@ -19,7 +19,7 @@ import {
   ColorModeScript,
   extendTheme,
 } from '@chakra-ui/react';
-import Navbar from '~/components/Navbar';
+import Navbar from '../components/Navbar';
 
 // Theme management with Chakra
 const theme = extendTheme({
